@@ -1,18 +1,24 @@
 package com.example.kekoufontandroid;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.TextView;
-
+import com.example.kekoufontandroid.adapter.ViewPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends FragmentActivity implements BottomNavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends FragmentActivity {
+    BottomNavigationView navView;
+    ViewPager2 pagerView;
+    List<Fragment> fragments;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,33 +30,52 @@ public class MainActivity extends FragmentActivity implements BottomNavigationVi
     }
 
     private void initView() {
-        ViewPager2 pagerView = (ViewPager2) findViewById(R.id.pager_view);
-        BottomNavigationView navView = (BottomNavigationView) findViewById(R.id.nav_view);
+        pagerView = findViewById(R.id.pager_view);
+        navView = findViewById(R.id.nav_view);
+        toolbar = findViewById(R.id.toolbar);
     }
 
     private void initData() {
+        fragments = new ArrayList<>();
+        fragments.add(new HomeFragment());
+        fragments.add(new LauncherFragment());
+        fragments.add(new NotificationFragment());
+
+        pagerView.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), getLifecycle(), fragments));
+
     }
 
     private void initListener() {
+        // BottomNavigationView Listener
+        navView.setOnNavigationItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.home) {
+                pagerView.setCurrentItem(0, false);
+                
+            } else if (itemId == R.id.msg) {
+                pagerView.setCurrentItem(1, false);
+            } else if (itemId == R.id.mine) {
+                pagerView.setCurrentItem(2, false);
+            }
+            return true;
+        });
+
+        //
+        pagerView.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
+            }
+            
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                navView.getMenu().getItem(position).setChecked(true);
+            }
+        });
+
+        pagerView.setUserInputEnabled(false);
     }
 
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
-    }
 }

@@ -8,6 +8,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import java.util.List;
 
+/**
+ * 主页面切换适配器
+ */
 public class ViewPagerAdapter extends FragmentStateAdapter {
     List<Fragment> fragments;
 

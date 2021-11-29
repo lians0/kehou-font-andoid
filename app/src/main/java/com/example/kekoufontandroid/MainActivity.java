@@ -1,16 +1,12 @@
 package com.example.kekoufontandroid;
 
 import android.os.Bundle;
-import android.view.View;
-
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.widget.ViewPager2;
-
 import com.example.kekoufontandroid.adapter.ViewPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,12 +46,15 @@ public class MainActivity extends FragmentActivity {
         navView.setOnNavigationItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.home) {
+                // 第二个参数禁滑动动画
                 pagerView.setCurrentItem(0, false);
-                
+                toolbar.setTitle("Home");
             } else if (itemId == R.id.msg) {
                 pagerView.setCurrentItem(1, false);
+                toolbar.setTitle("记录");
             } else if (itemId == R.id.mine) {
                 pagerView.setCurrentItem(2, false);
+                toolbar.setTitle("我的");
             }
             return true;
         });
@@ -73,8 +72,12 @@ public class MainActivity extends FragmentActivity {
                 navView.getMenu().getItem(position).setChecked(true);
             }
         });
-
+        //禁止滑动
         pagerView.setUserInputEnabled(false);
+
+//        toolbar.setNavigationOnClickListener(()->{
+//
+//        });
     }
 
 

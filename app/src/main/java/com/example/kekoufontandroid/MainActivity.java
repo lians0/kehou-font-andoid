@@ -1,7 +1,9 @@
 package com.example.kekoufontandroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -12,6 +14,7 @@ import com.example.kekoufontandroid.adapter.ViewPagerAdapter;
 import com.example.kekoufontandroid.fragment.HomeFragment;
 import com.example.kekoufontandroid.fragment.LauncherFragment;
 import com.example.kekoufontandroid.fragment.NotificationFragment;
+import com.example.kekoufontandroid.utils.SPDataUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -28,6 +31,11 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(SPDataUtils.get(this)==null){
+           startActivity(new Intent(MainActivity.this,LoginActivity.class));
+        }else{
+            Toast.makeText(this,SPDataUtils.get(this),Toast.LENGTH_SHORT).show();
+        }
         initView();
         initData();
         initListener();

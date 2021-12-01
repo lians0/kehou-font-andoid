@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 
+import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -34,7 +35,7 @@ import okhttp3.Response;
 import okhttp3.TlsVersion;
 
 public class OkHttpUtil {
-    private static OkHttpClient client = new OkHttpClient();
+    private static final OkHttpClient client = new OkHttpClient();
     static final String BASE_URL = "http://192.168.220.169:8081";
 
 
@@ -111,21 +112,10 @@ public class OkHttpUtil {
                     .build();
             Response response = client.newCall(request).execute();
 
-            String responseString = response.body().string();
-            Map<String, String> responseMap = JSON.parseObject(responseString, new TypeReference<HashMap<String, String>>() {
-            });
-
-//            Map<String, Object> responseMap = (Map<String, Object>) (JSON.parse(responseString));
-            String code = responseMap.get("code");
-            if (!"200".equals(code.toString())) {
-                throw new RuntimeException(responseMap.get("msg").toString());
-            }
-            String data = responseMap.get("data");
-            return data;
+            return dealData(response);
 
         } catch (Exception e) {
             Log.d("okhttp", e.getMessage());
-
             Looper.prepare();
             Toast.makeText(App.mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
             Looper.loop();
@@ -155,21 +145,10 @@ public class OkHttpUtil {
                     .addHeader("Auth", SPDataUtils.get(App.mContext) == null ? "null" : SPDataUtils.get(App.mContext))
                     .post(body)
                     .build();
-
             Log.d("okhttp", request.toString());
-
             Response response = client.newCall(request).execute();
-            String responseString = response.body().string();
-            Map<String, String> responseMap = JSON.parseObject(responseString, new TypeReference<HashMap<String, String>>() {
-            });
 
-//            Map<String, Object> responseMap = (Map<String, Object>) (JSON.parse(responseString));
-            String code = responseMap.get("code");
-            if (!"200".equals(code.toString())) {
-                throw new RuntimeException(responseMap.get("msg").toString());
-            }
-            String data = responseMap.get("data");
-            return data;
+            return dealData(response);
         } catch (Exception e) {
             Log.d("okhttp", e.getMessage());
 
@@ -184,10 +163,12 @@ public class OkHttpUtil {
 
     //异步GET请求
     //对于异步请求就不需要返回值，因为会提供一个自定义处理方法，数据交给这个方法处理即可
-    public static void asyGet(String url, Callback callback) {
+    public static void asyGet(String url, MyCallback callback) {
         try {
             Request request = new Request.Builder()
-                    .url(url)
+                    .addHeader("Auth", SPDataUtils.get(App.mContext) == null ? "null" : SPDataUtils.get(App.mContext))
+                    .addHeader("Connection", "close")
+                    .url(BASE_URL+url)
                     .build();
             client.newCall(request).enqueue(callback);
         } catch (Exception e) {
@@ -197,23 +178,44 @@ public class OkHttpUtil {
     }
 
     //异步POST请求
-    public static void asyPost(String url, Map params, Callback callback) {
+    public static void asyPost(String url, Map params, MyCallback callback) {
         try {
+
             String jsonStr = JSON.toJSONString(params);
-            RequestBody requestBody = new FormBody.Builder()
-                    .add("jsonStr", jsonStr)
+//            RequestBody requestBody=new FormBody.Builder()
+//                    .add("jsonStr",jsonStr)
+//                    .build();
+
+            RequestBody body = FormBody.create(MediaType.parse("application/json"), jsonStr);
+            Request request = new Request.Builder()
+                    .url(BASE_URL + url)
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Connection", "close")
+                    .addHeader("Auth", SPDataUtils.get(App.mContext) == null ? "null" : SPDataUtils.get(App.mContext))
+                    .post(body)
                     .build();
 
-            Request request = new Request.Builder()
-                    .url(url)
-                    .post(requestBody)
-                    .build();
             client.newCall(request).enqueue(callback);
         } catch (Exception e) {
             Log.d("ok http", "ok http is error");
             e.printStackTrace();
         }
     }
+
+    public static String dealData(Response response) throws IOException {
+
+        String responseString = response.body().string();
+        Map<String, String> responseMap = JSON.parseObject(responseString, new TypeReference<HashMap<String, String>>() {
+        });
+
+        String code = responseMap.get("code");
+        if (!"200".equals(code.toString())) {
+            throw new RuntimeException(responseMap.get("msg").toString());
+        }
+        return responseMap.get("data");
+    }
+
+
 //    //文件上传,同步类型
 //    public static String fileUpload(String url, File file,Map params){
 //        try{

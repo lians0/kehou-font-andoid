@@ -1,17 +1,15 @@
-package com.example.kekoufontandroid;
+package com.example.kekoufontandroid.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
-import com.example.kekoufontandroid.domain.Result;
+import com.example.kekoufontandroid.R;
 import com.example.kekoufontandroid.utils.OkHttpUtil;
 import com.example.kekoufontandroid.utils.SPDataUtils;
 

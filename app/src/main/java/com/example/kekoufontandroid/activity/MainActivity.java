@@ -1,15 +1,15 @@
-package com.example.kekoufontandroid;
+package com.example.kekoufontandroid.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.kekoufontandroid.R;
 import com.example.kekoufontandroid.adapter.ViewPagerAdapter;
 import com.example.kekoufontandroid.fragment.HomeFragment;
 import com.example.kekoufontandroid.fragment.LauncherFragment;

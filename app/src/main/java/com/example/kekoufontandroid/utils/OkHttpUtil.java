@@ -82,6 +82,7 @@ public class OkHttpUtil {
                 .hostnameVerifier(DO_NOT_VERIFY)
                 .build();
     }
+
     private static OkHttpClient getHttpClient() {
         // Https 异常：javax.net.ssl.SSLHandshakeException: Handshake failed
         // Caused by: javax.net.ssl.SSLProtocolException: SSL handshake aborted: ssl=0x7a59e45208: Failure in SSL library, usually a protocol error
@@ -104,8 +105,9 @@ public class OkHttpUtil {
     public static String synGet(String url) {
         try {
             Request request = new Request.Builder()
-                    .url(BASE_URL+url)
+                    .url(BASE_URL + url)
                     .addHeader("Auth", SPDataUtils.get(App.mContext) == null ? "null" : SPDataUtils.get(App.mContext))
+                    .addHeader("Connection", "close")
                     .build();
             Response response = client.newCall(request).execute();
 
@@ -156,7 +158,7 @@ public class OkHttpUtil {
 
             Log.d("okhttp", request.toString());
 
-            Response response =client.newCall(request).execute();
+            Response response = client.newCall(request).execute();
             String responseString = response.body().string();
             Map<String, String> responseMap = JSON.parseObject(responseString, new TypeReference<HashMap<String, String>>() {
             });

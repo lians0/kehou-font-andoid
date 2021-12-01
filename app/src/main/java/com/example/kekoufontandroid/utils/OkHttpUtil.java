@@ -24,6 +24,7 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import lombok.SneakyThrows;
 import okhttp3.Callback;
 import okhttp3.ConnectionSpec;
 import okhttp3.FormBody;
@@ -127,15 +128,12 @@ public class OkHttpUtil {
 
     /**
      * 同步POST请求
-     * 参数以map形式传入，通过fastjson进行解析成json字符串形式，加载到请求body中
+     * @param params 参数map
      */
     public static String synPost(String url, Map<String, String> params) {
         try {
 
             String jsonStr = JSON.toJSONString(params);
-//            RequestBody requestBody=new FormBody.Builder()
-//                    .add("jsonStr",jsonStr)
-//                    .build();
 
             RequestBody body = FormBody.create(MediaType.parse("application/json"), jsonStr);
             Request request = new Request.Builder()
@@ -161,14 +159,15 @@ public class OkHttpUtil {
         }
     }
 
-    //异步GET请求
-    //对于异步请求就不需要返回值，因为会提供一个自定义处理方法，数据交给这个方法处理即可
+    /**
+     * 异步GET请求
+     */
     public static void asyGet(String url, MyCallback callback) {
         try {
             Request request = new Request.Builder()
                     .addHeader("Auth", SPDataUtils.get(App.mContext) == null ? "null" : SPDataUtils.get(App.mContext))
                     .addHeader("Connection", "close")
-                    .url(BASE_URL+url)
+                    .url(BASE_URL + url)
                     .build();
             client.newCall(request).enqueue(callback);
         } catch (Exception e) {
@@ -177,15 +176,13 @@ public class OkHttpUtil {
         }
     }
 
-    //异步POST请求
-    public static void asyPost(String url, Map params, MyCallback callback) {
+    /**
+     * 异步POST请求
+     */
+    public static void asyPost(String url, Map<Object, Object> params, MyCallback callback) {
         try {
 
             String jsonStr = JSON.toJSONString(params);
-//            RequestBody requestBody=new FormBody.Builder()
-//                    .add("jsonStr",jsonStr)
-//                    .build();
-
             RequestBody body = FormBody.create(MediaType.parse("application/json"), jsonStr);
             Request request = new Request.Builder()
                     .url(BASE_URL + url)
@@ -202,15 +199,19 @@ public class OkHttpUtil {
         }
     }
 
-    public static String dealData(Response response) throws IOException {
-
+    /**
+     * 处理响应数据
+     */
+    @SneakyThrows
+    public static String dealData(Response response) {
+        assert response.body() != null;
         String responseString = response.body().string();
         Map<String, String> responseMap = JSON.parseObject(responseString, new TypeReference<HashMap<String, String>>() {
         });
 
         String code = responseMap.get("code");
-        if (!"200".equals(code.toString())) {
-            throw new RuntimeException(responseMap.get("msg").toString());
+        if (!"200".equals(code)) {
+            throw new RuntimeException(responseMap.get("msg"));
         }
         return responseMap.get("data");
     }

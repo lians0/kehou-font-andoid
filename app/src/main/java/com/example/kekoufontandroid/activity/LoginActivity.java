@@ -32,7 +32,9 @@ public class LoginActivity extends AppCompatActivity {
         login = findViewById(R.id.login);
 
         String token = SPDataUtils.get(this);
-        Toast.makeText(this, token, Toast.LENGTH_SHORT).show();
+        if (token != null) {
+            Toast.makeText(this, token, Toast.LENGTH_SHORT).show();
+        }
 
         initListener();
     }

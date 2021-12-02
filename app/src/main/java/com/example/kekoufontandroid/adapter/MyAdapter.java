@@ -33,7 +33,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //创建一个item的实例
-        View view = View.inflate(context, R.layout.item, null);
+        View view = View.inflate(context, R.layout.favorites_item, null);
         // 把整个item传给ViewHolder
         return new MyViewHolder(view);
     }
@@ -89,7 +89,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     private OnRecyclerItemClickListener mOnItemClickListener;
 
-    public void setmOnItemClickListener(OnRecyclerItemClickListener listener) {
+    public void setOnItemClickListener(OnRecyclerItemClickListener listener) {
         mOnItemClickListener = listener;
     }
 

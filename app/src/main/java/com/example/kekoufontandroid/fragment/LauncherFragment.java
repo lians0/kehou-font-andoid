@@ -1,6 +1,5 @@
 package com.example.kekoufontandroid.fragment;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.fastjson.JSON;
@@ -77,7 +75,7 @@ public class LauncherFragment extends Fragment {
         mRecyclerView.setAdapter(myAdapter);
 
         // 为了在这个里写事件要做的事情
-        myAdapter.setmOnItemClickListener(new MyAdapter.OnRecyclerItemClickListener() {
+        myAdapter.setOnItemClickListener(new MyAdapter.OnRecyclerItemClickListener() {
             @Override
             public void OnRecyclerItemClick(int position) {
                 Log.e("lian", "OnRecyclerItemClick" + position);

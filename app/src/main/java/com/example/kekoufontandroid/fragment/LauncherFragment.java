@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -65,12 +66,12 @@ public class LauncherFragment extends Fragment {
         //设置recycleView的布局方式
         //垂直布局
         //参数是：上下文、列表方向（横向还是纵向）、是否倒叙
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(linearLayoutManager);
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+//        mRecyclerView.setLayoutManager(linearLayoutManager);
 
         //网格布局
-//        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,3);
-//        recycleVeiw.setLayoutManager(gridLayoutManager);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),3);
+        mRecyclerView.setLayoutManager(gridLayoutManager);
 
         myAdapter = new MyAdapter(favorites, getActivity());
         mRecyclerView.setAdapter(myAdapter);

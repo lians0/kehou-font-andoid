@@ -62,8 +62,8 @@ dependencies {
     implementation group: 'com.github.bumptech.glide', name: 'glide', version: '4.8.0'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
-
-
+// https://mvnrepository.com/artifact/androidx.cardview/cardview
+    implementation group: 'androidx.cardview', name: 'cardview', version: '1.0.0'
 
 
 }

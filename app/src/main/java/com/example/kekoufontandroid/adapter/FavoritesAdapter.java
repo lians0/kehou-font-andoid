@@ -15,11 +15,11 @@ import com.example.kekoufontandroid.domain.Favorites;
 
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.MyViewHolder> {
     public   List<Favorites> data;
     private final Context context;
 
-    public MyAdapter(List<Favorites> data, Context context) {
+    public FavoritesAdapter(List<Favorites> data, Context context) {
         this.data = data;
         this.context = context;
     }

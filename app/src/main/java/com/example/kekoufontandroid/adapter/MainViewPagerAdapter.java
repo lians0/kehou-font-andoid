@@ -11,10 +11,10 @@ import java.util.List;
 /**
  * 主页面切换适配器
  */
-public class ViewPagerAdapter extends FragmentStateAdapter {
+public class MainViewPagerAdapter extends FragmentStateAdapter {
     List<Fragment> fragments;
 
-    public ViewPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, List<Fragment> fragments) {
+    public MainViewPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, List<Fragment> fragments) {
         super(fragmentManager, lifecycle);
         this.fragments = fragments;
     }

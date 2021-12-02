@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.kekoufontandroid.R;
-import com.example.kekoufontandroid.adapter.ViewPagerAdapter;
+import com.example.kekoufontandroid.adapter.MainViewPagerAdapter;
 import com.example.kekoufontandroid.fragment.HomeFragment;
 import com.example.kekoufontandroid.fragment.LauncherFragment;
 import com.example.kekoufontandroid.fragment.NotificationFragment;
@@ -52,7 +52,7 @@ public class MainActivity extends FragmentActivity {
         fragments.add(new HomeFragment());
         fragments.add(new LauncherFragment());
         fragments.add(new NotificationFragment());
-        pagerView.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), getLifecycle(), fragments));
+        pagerView.setAdapter(new MainViewPagerAdapter(getSupportFragmentManager(), getLifecycle(), fragments));
     }
 
     private void initListener() {

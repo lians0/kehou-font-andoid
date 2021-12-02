@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.fastjson.JSON;
 import com.example.kekoufontandroid.R;
-import com.example.kekoufontandroid.adapter.MyAdapter;
+import com.example.kekoufontandroid.adapter.FavoritesAdapter;
 import com.example.kekoufontandroid.domain.Favorites;
 import com.example.kekoufontandroid.utils.MyCallback;
 import com.example.kekoufontandroid.utils.OkHttpUtil;
@@ -30,13 +30,13 @@ public class LauncherFragment extends Fragment {
     private View view;
     public RecyclerView mRecyclerView;
     private List<Favorites> favorites;
-    private MyAdapter myAdapter;
+    private FavoritesAdapter favoritesAdapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.activity_launcherfragment, container, false);
+        view = inflater.inflate(R.layout.fragment_favorites, container, false);
         initRecyclerView();
         initData();
         return view;
@@ -50,9 +50,9 @@ public class LauncherFragment extends Fragment {
                 Log.d("okhttp", data);
                 favorites = JSON.parseArray(data, Favorites.class);
                 Log.d("okhttp", favorites.toString());
-                myAdapter.data = favorites;
+                favoritesAdapter.data = favorites;
                 Objects.requireNonNull(getActivity()).runOnUiThread(() ->
-                        myAdapter.notifyDataSetChanged());
+                        favoritesAdapter.notifyDataSetChanged());
             }
         });
 
@@ -71,11 +71,11 @@ public class LauncherFragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),3);
         mRecyclerView.setLayoutManager(gridLayoutManager);
 
-        myAdapter = new MyAdapter(favorites, getActivity());
-        mRecyclerView.setAdapter(myAdapter);
+        favoritesAdapter = new FavoritesAdapter(favorites, getActivity());
+        mRecyclerView.setAdapter(favoritesAdapter);
 
         // 为了在这个里写事件要做的事情
-        myAdapter.setOnItemClickListener(new MyAdapter.OnRecyclerItemClickListener() {
+        favoritesAdapter.setOnItemClickListener(new FavoritesAdapter.OnRecyclerItemClickListener() {
             @Override
             public void OnRecyclerItemClick(int position) {
                 Log.e("lian", "OnRecyclerItemClick" + position);

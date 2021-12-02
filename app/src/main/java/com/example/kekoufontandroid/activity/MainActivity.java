@@ -12,7 +12,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.kekoufontandroid.R;
 import com.example.kekoufontandroid.adapter.MainViewPagerAdapter;
 import com.example.kekoufontandroid.fragment.HomeFragment;
-import com.example.kekoufontandroid.fragment.LauncherFragment;
+import com.example.kekoufontandroid.fragment.FavoritesFragment;
 import com.example.kekoufontandroid.fragment.NotificationFragment;
 import com.example.kekoufontandroid.utils.SPDataUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -50,7 +50,7 @@ public class MainActivity extends FragmentActivity {
     private void initData() {
         fragments = new ArrayList<>();
         fragments.add(new HomeFragment());
-        fragments.add(new LauncherFragment());
+        fragments.add(new FavoritesFragment());
         fragments.add(new NotificationFragment());
         pagerView.setAdapter(new MainViewPagerAdapter(getSupportFragmentManager(), getLifecycle(), fragments));
     }

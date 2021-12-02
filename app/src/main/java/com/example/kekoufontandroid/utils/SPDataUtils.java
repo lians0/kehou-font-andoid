@@ -5,6 +5,10 @@ import static android.content.Context.MODE_PRIVATE;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+/**
+ * 操作用SharedPreferences
+ * 当前只用于存/取/删除token
+ */
 public class SPDataUtils {
 
     private static final  String mFileName="myData";

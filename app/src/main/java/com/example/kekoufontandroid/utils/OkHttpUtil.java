@@ -35,6 +35,9 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.TlsVersion;
 
+/**
+ * 对okHttp进一步封装
+ */
 public class OkHttpUtil {
     private static final OkHttpClient client = new OkHttpClient();
     static final String BASE_URL = "http://192.168.220.169:8081";

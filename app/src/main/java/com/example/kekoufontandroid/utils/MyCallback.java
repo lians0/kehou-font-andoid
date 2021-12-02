@@ -12,7 +12,12 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public abstract class MyCallback implements Callback {
+/**
+ * 自定义异步请求的回调函数
+ * 在此处做公共操作
+ * 主要是处理请求失败的处理
+ */
+abstract class MyCallback implements Callback {
     @Override
     public void onFailure(@NonNull Call call, IOException e) {
         Log.d("okhttp", e.getMessage());

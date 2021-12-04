@@ -1,6 +1,7 @@
 package com.example.kekoufontandroid.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.fastjson.JSON;
 import com.example.kekoufontandroid.R;
+import com.example.kekoufontandroid.activity.SubjectDetailActivity;
 import com.example.kekoufontandroid.adapter.FavoritesAdapter;
 import com.example.kekoufontandroid.domain.Favorites;
 import com.example.kekoufontandroid.utils.MyCallback;
@@ -55,7 +57,7 @@ public class FavoritesFragment extends Fragment {
         favorites_sr = view.findViewById(R.id.favorites_sr);
         favorites_sr.setOnRefreshListener(refreshLayout -> {
             Toast.makeText(getActivity(), "刷新", Toast.LENGTH_SHORT).show();
-           refresh();
+            refresh();
             refreshLayout.finishRefresh();
         });
         //上拉加载更多数据
@@ -70,8 +72,7 @@ public class FavoritesFragment extends Fragment {
      * 进入Favorites去请求数据
      */
     private void initData() {
-       refresh();
-
+        refresh();
     }
 
     private void initRecyclerView() {
@@ -95,17 +96,23 @@ public class FavoritesFragment extends Fragment {
             @Override
             public void OnRecyclerItemClick(int position) {
                 Log.e("lian", "OnRecyclerItemClick" + position);
+                Intent intent = new Intent(getActivity(), SubjectDetailActivity.class);
+                intent.putExtra("subjectId", favorites.get(position).getId());
+                startActivity(intent);
             }
         });
     }
 
+    /**
+     * 刷新
+     */
     public void refresh() {
         OkHttpUtil.asyGet("/favorites/getFavoritesByUsername", new MyCallback() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String data = OkHttpUtil.dealData(response);
-//                Log.d("okhttp", data);
+                Log.d("okhttp", data);
                 favorites = JSON.parseArray(data, Favorites.class);
                 Log.d("okhttp", favorites.toString());
                 favoritesAdapter.data = favorites;

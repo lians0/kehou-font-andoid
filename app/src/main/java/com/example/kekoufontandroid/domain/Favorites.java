@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Favorites {
-    private String id;
+    private String subjectId;
     private String subjectName;
     private String iconUrl;
 }

@@ -7,6 +7,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TableLayout;
 
 import com.example.kekoufontandroid.R;
@@ -51,7 +52,10 @@ public class SubjectDetailActivity extends AppCompatActivity {
 
     private void initData() {
         Intent intent = getIntent();
-        String subjectId = intent.getStringExtra("subjectId");
+        Bundle bundle=intent.getExtras();
+        String subjectId = bundle.getString("subjectId");
+
+//        Log.i("okhttp",subjectId);
 
         titles.add("课程详情");
         titles.add("记录");
@@ -63,7 +67,7 @@ public class SubjectDetailActivity extends AppCompatActivity {
         subject_detail_pager2.setAdapter(new SubjectDetailAdapter(getSupportFragmentManager(), getLifecycle(), fragments));
     }
     private void initListener() {
-
+        // 使TabLayout与ViewPager2联动
         new TabLayoutMediator(subject_detail_tab, subject_detail_pager2, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {

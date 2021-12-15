@@ -89,18 +89,20 @@ public class FavoritesFragment extends Fragment {
         mRecyclerView.setLayoutManager(gridLayoutManager);
 
         favoritesAdapter = new FavoritesAdapter(favorites, getActivity());
-        mRecyclerView.setAdapter(favoritesAdapter);
 
-        // 为了在这个里写事件要做的事情
-        favoritesAdapter.setOnItemClickListener(new FavoritesAdapter.OnRecyclerItemClickListener() {
-            @Override
-            public void OnRecyclerItemClick(int position) {
-                Log.e("lian", "OnRecyclerItemClick" + position);
-                Intent intent = new Intent(getActivity(), SubjectDetailActivity.class);
-                intent.putExtra("subjectId", favorites.get(position).getId());
-                startActivity(intent);
-            }
+        /* 为了在这个里写事件要做的事情
+         点击元素的事件 讲subjectId 从当前fragment->SubjectDetailActivity
+         */
+        favoritesAdapter.setOnItemClickListener(position -> {
+            Log.e("lian", "OnRecyclerItemClick" + position);
+            Intent intent = new Intent(getActivity(), SubjectDetailActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("subjectId",favorites.get(position).getSubjectId());
+            intent.putExtras(bundle);
+            Log.e("lian",favorites.get(position).getSubjectId());
+            startActivity(intent);
         });
+        mRecyclerView.setAdapter(favoritesAdapter);
     }
 
     /**

@@ -174,7 +174,7 @@ public class OkHttpUtil {
                     .build();
             client.newCall(request).enqueue(callback);
         } catch (Exception e) {
-            Log.d("ok http", "ok http is error");
+            Log.d("okhttp", "ok http is error");
             e.printStackTrace();
         }
     }
@@ -197,7 +197,7 @@ public class OkHttpUtil {
 
             client.newCall(request).enqueue(callback);
         } catch (Exception e) {
-            Log.d("ok http", "ok http is error");
+            Log.d("okhttp", "ok http is error");
             e.printStackTrace();
         }
     }
@@ -207,11 +207,16 @@ public class OkHttpUtil {
      */
     @SneakyThrows
     public static String dealData(Response response) {
+//        Log.d("okhttp", "1111"+response);
+
         assert response.body() != null;
+//        if (response.body()==null) {
+//            return "{}";
+//        }
         String responseString = response.body().string();
+        Log.d("okhttp", responseString);
         Map<String, String> responseMap = JSON.parseObject(responseString, new TypeReference<HashMap<String, String>>() {
         });
-
         String code = responseMap.get("code");
         if (!"200".equals(code)) {
             throw new RuntimeException(responseMap.get("msg"));

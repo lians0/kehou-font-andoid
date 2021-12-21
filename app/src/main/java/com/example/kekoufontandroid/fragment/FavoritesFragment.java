@@ -23,10 +23,6 @@ import com.example.kekoufontandroid.domain.Favorites;
 import com.example.kekoufontandroid.utils.MyCallback;
 import com.example.kekoufontandroid.utils.OkHttpUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.io.IOException;
 import java.util.List;
@@ -76,7 +72,7 @@ public class FavoritesFragment extends Fragment {
     }
 
     private void initRecyclerView() {
-        mRecyclerView = view.findViewById(R.id.re_view);
+        mRecyclerView = view.findViewById(R.id.review_fragment_favorites);
 
         //设置recycleView的布局方式
         //垂直布局

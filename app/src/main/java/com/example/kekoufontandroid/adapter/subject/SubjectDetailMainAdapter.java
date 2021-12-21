@@ -1,4 +1,4 @@
-package com.example.kekoufontandroid.adapter;
+package com.example.kekoufontandroid.adapter.subject;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -8,10 +8,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import java.util.List;
 
-public class SubjectDetailAdapter extends FragmentStateAdapter {
+public class SubjectDetailMainAdapter extends FragmentStateAdapter {
     List<Fragment> fragments;
 
-    public SubjectDetailAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, List<Fragment> fragments) {
+    public SubjectDetailMainAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, List<Fragment> fragments) {
         super(fragmentManager, lifecycle);
         this.fragments = fragments;
     }

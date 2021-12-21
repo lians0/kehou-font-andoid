@@ -1,38 +1,22 @@
 package com.example.kekoufontandroid.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TableLayout;
 
-import com.alibaba.fastjson.JSON;
 import com.example.kekoufontandroid.R;
-import com.example.kekoufontandroid.adapter.MainViewPagerAdapter;
-import com.example.kekoufontandroid.adapter.SubjectDetailAdapter;
-import com.example.kekoufontandroid.domain.Favorites;
-import com.example.kekoufontandroid.fragment.FavoritesFragment;
-import com.example.kekoufontandroid.fragment.HomeFragment;
-import com.example.kekoufontandroid.fragment.NotificationFragment;
+import com.example.kekoufontandroid.adapter.subject.SubjectDetailMainAdapter;
 import com.example.kekoufontandroid.fragment.subject.SubjectDetailCommentFragment;
 import com.example.kekoufontandroid.fragment.subject.SubjectDetailFragment;
 import com.example.kekoufontandroid.fragment.subject.SubjectDetailRecordFragment;
-import com.example.kekoufontandroid.utils.OkHttpUtil;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-
-import okhttp3.Call;
-import okhttp3.Response;
 
 /**
  * 课程详情主activity
@@ -74,7 +58,7 @@ public class SubjectDetailActivity extends AppCompatActivity {
         fragments.add(new SubjectDetailFragment(subjectId));
         fragments.add(new SubjectDetailRecordFragment());
         fragments.add(new SubjectDetailCommentFragment(subjectId));
-        subject_detail_pager2.setAdapter(new SubjectDetailAdapter(getSupportFragmentManager(), getLifecycle(), fragments));
+        subject_detail_pager2.setAdapter(new SubjectDetailMainAdapter(getSupportFragmentManager(), getLifecycle(), fragments));
     }
 
     private void initListener() {

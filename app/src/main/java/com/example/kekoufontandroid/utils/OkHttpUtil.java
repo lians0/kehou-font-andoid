@@ -40,7 +40,7 @@ import okhttp3.TlsVersion;
  */
 public class OkHttpUtil {
     private static final OkHttpClient client = new OkHttpClient();
-    static final String BASE_URL = "http://192.168.11.169:8081";
+    static final String BASE_URL ="http://192.168.237.169:8081";
 
 
     /**
@@ -55,7 +55,6 @@ public class OkHttpUtil {
 
             @Override
             public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-
             }
 
             @Override
@@ -204,6 +203,7 @@ public class OkHttpUtil {
 
     /**
      * 处理响应数据
+     * 返回data体中的json字符串
      */
     @SneakyThrows
     public static String dealData(Response response) {
@@ -219,7 +219,8 @@ public class OkHttpUtil {
         });
         String code = responseMap.get("code");
         if (!"200".equals(code)) {
-            throw new RuntimeException(responseMap.get("msg"));
+            Toast.makeText(App.mContext, responseMap.get("msg"), Toast.LENGTH_SHORT).show();
+//            throw new RuntimeException(responseMap.get("msg"));
         }
         return responseMap.get("data");
     }

@@ -56,7 +56,7 @@ public class SubjectDetailActivity extends AppCompatActivity {
         titles.add("学科评价");
         fragments = new ArrayList<>();
         fragments.add(new SubjectDetailFragment(subjectId));
-        fragments.add(new SubjectDetailRecordFragment());
+        fragments.add(new SubjectDetailRecordFragment(subjectId));
         fragments.add(new SubjectDetailCommentFragment(subjectId));
         subject_detail_pager2.setAdapter(new SubjectDetailMainAdapter(getSupportFragmentManager(), getLifecycle(), fragments));
     }

@@ -71,6 +71,7 @@ public class SubjectDetailFragment extends Fragment {
         // 获取学科详情数据
         OkHttpUtil.asyGet("/course/getCourseListAndSubjectInfo/" + subjectId, new MyCallback() {
 
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onResponse(Call call, Response response) {
                 String data = OkHttpUtil.dealData(response);

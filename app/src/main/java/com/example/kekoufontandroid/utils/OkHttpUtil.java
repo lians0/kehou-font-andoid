@@ -40,7 +40,7 @@ import okhttp3.TlsVersion;
  */
 public class OkHttpUtil {
     private static final OkHttpClient client = new OkHttpClient();
-    static final String BASE_URL ="http://192.168.82.169:8081";
+    static final String BASE_URL ="http://192.168.238.169:8081";
 
 
     /**

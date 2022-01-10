@@ -25,13 +25,9 @@ public class SubjectDetailRecordAdapter extends BaseAdapter {
     @SuppressLint("ViewHolder")
     private View recordItemView;
 
-    public SubjectDetailRecordAdapter(List<Course> data) {
-        this.data = data;
-    }
-
     @Override
     public int getCount() {
-        return data.size();
+        return 12;
     }
 
     @Override

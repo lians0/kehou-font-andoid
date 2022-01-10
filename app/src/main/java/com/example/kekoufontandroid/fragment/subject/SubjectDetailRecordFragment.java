@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
@@ -42,14 +43,17 @@ public class SubjectDetailRecordFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        // 初始化 fragment_subject_detail_record
         recordFragment = inflater.inflate(R.layout.fragment_subject_detail_record, container, false);
         initRecord();
         return recordFragment;
     }
-
+    /**
+     * 获取记录 todo:分页处理
+     * 获取数据，绑定适配器
+     */
     private void initRecord() {
-        DiyGridview diyGridview = (DiyGridview) recordFragment.findViewById(R.id.subject_detail_diyGridview);
+        DiyGridview diyGridview =  recordFragment.findViewById(R.id.subject_detail_diyGridview);
         subjectDetailRecordAdapter = new SubjectDetailRecordAdapter();
 
         diyGridview.setAdapter(subjectDetailRecordAdapter);
@@ -66,7 +70,6 @@ public class SubjectDetailRecordFragment extends Fragment {
                 List<Course> courseList = JSON.parseObject(data, listType);
                 Log.d("okhttp", courseList.toString());
                 subjectDetailRecordAdapter.setData(courseList);
-
 
                 //返回ui线程
                 Objects.requireNonNull(getActivity()).runOnUiThread(() -> {

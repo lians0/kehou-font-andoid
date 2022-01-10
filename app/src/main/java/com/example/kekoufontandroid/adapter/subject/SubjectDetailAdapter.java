@@ -18,23 +18,34 @@ import com.example.kekoufontandroid.domain.vo.SubjectAndSubjectInfoVO;
 
 import java.util.List;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class SubjectDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    public SubjectAndSubjectInfoVO data;
+    private SubjectAndSubjectInfoVO data =new SubjectAndSubjectInfoVO();
     private final Context context;
 
     private final int FIRST_ITEM = 0;
 
-
     public SubjectDetailAdapter(SubjectAndSubjectInfoVO data, Context context) {
         this.data = data;
         this.context = context;
-    }
+//        this.data.setSubjectIcon("http://r5h5cd6ap.bkt.clouddn.com/java编程思想.jpg");
+//        this.data.setSubjectDesc("111");
+//        this.data.setSubjectName("111");
+//        this.data.setCourseTotal(2);
+//        this.data.setJoinTotal(3);
+//        this.data.setTeacher("sefs");
 
-    /**
-     * 根据不同的position，设置不同的ViewType
-     * position表示当前是第几个Item，通过position拿到当前的Item对象，然后判断这个item对象需要那种视图
-     */
+    }
+//
+//    /**
+//     * 根据不同的position，设置不同的ViewType
+//     * position表示当前是第几个Item，通过position拿到当前的Item对象，然后判断这个item对象需要那种视图
+//     */
 //    @Override
 //    public int getItemViewType(int position) {
 //        if (position == FIRST_ITEM) {
@@ -48,45 +59,46 @@ public class SubjectDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        if (viewType == FIRST_ITEM) {
-//            View firstItem = View.inflate(context, R.layout.item_subject_detail_first, parent);
-//            return new FirstItemViewHolder(firstItem);
-//        } else {
-//            View otherItem = View.inflate(context, R.layout.item_record, parent);
-//            return new OtherItemViewHolder(otherItem);
-//        }
+        if (viewType == FIRST_ITEM) {
+            View firstItem = View.inflate(context, R.layout.item_subject_detail_first, null);
+            return new FirstItemViewHolder(firstItem);
+        } else {
             View otherItem = View.inflate(context, R.layout.item_record, null);
             return new OtherItemViewHolder(otherItem);
+        }
+//            View otherItem = View.inflate(context, R.layout.item_record, null);
+//            return new OtherItemViewHolder(otherItem);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-//        if (position==FIRST_ITEM) {
-//            FirstItemViewHolder firstItemViewHolder = (FirstItemViewHolder) holder;
-//            Glide.with(context).load(data.getSubjectIcon()).into(firstItemViewHolder.bookImage);
-//            firstItemViewHolder.joinTotal.setText(data.getJoinTotal());
-//            firstItemViewHolder.teacherName.setText(data.getTeacher());
-//            firstItemViewHolder.subjectDesc.setText(data.getSubjectDesc());
-//        }else{
-//            OtherItemViewHolder otherItemViewHolder = (OtherItemViewHolder) holder;
-//            List<SubjectAndSubjectInfoVO.CourseVO> courseList = data.getCourseList();
-//            SubjectAndSubjectInfoVO.CourseVO courseVO = courseList.get(position - 1);
-//            otherItemViewHolder.recordTitle.setText(courseVO.getCourseName());
-//            otherItemViewHolder.classAddr.setText("测试"+position);
-//            otherItemViewHolder.dataIndex.setText(position);
-//        }
-        OtherItemViewHolder otherItemViewHolder = (OtherItemViewHolder) holder;
-        List<SubjectAndSubjectInfoVO.CourseVO> courseList = data.getCourseList();
-        SubjectAndSubjectInfoVO.CourseVO courseVO = courseList.get(position );
-        otherItemViewHolder.recordTitle.setText(courseVO.getCourseName());
-        otherItemViewHolder.classAddr.setText("测试"+position);
-        otherItemViewHolder.dataIndex.setText(position);
+        if (position==FIRST_ITEM) {
+            FirstItemViewHolder firstItemViewHolder = (FirstItemViewHolder) holder;
+            Glide.with(context).load(data.getSubjectIcon()).into(firstItemViewHolder.bookImage);
+            firstItemViewHolder.joinTotal.setText(data.getJoinTotal()+"");
+            firstItemViewHolder.teacherName.setText(data.getTeacher());
+            firstItemViewHolder.subjectDesc.setText(data.getSubjectDesc());
+        }else{
+            OtherItemViewHolder otherItemViewHolder = (OtherItemViewHolder) holder;
+            List<SubjectAndSubjectInfoVO.CourseVO> courseList = data.getCourseList();
+            SubjectAndSubjectInfoVO.CourseVO courseVO = courseList.get(position - 1);
+            otherItemViewHolder.recordTitle.setText(courseVO.getCourseName());
+            otherItemViewHolder.classAddr.setText("测试"+position);
+            otherItemViewHolder.dataIndex.setText(position+"");
+        }
+//        OtherItemViewHolder otherItemViewHolder = (OtherItemViewHolder) holder;
+//        List<SubjectAndSubjectInfoVO.CourseVO> courseList = data.getCourseList();
+//        SubjectAndSubjectInfoVO.CourseVO courseVO = courseList.get(position );
+//        otherItemViewHolder.recordTitle.setText(courseVO.getCourseName());
+//        otherItemViewHolder.classAddr.setText("测试"+position);
+//        otherItemViewHolder.dataIndex.setText(position);
     }
 
 
     @Override
     public int getItemCount() {
-        return 0;
+//        return data.getCourseList().size()+1;
+        return 1;
     }
 
     public class FirstItemViewHolder extends RecyclerView.ViewHolder {

@@ -41,7 +41,7 @@ public class SubjectDetailFragment extends Fragment {
     private View view;
     private RecyclerView mRecyclerView;
     private SubjectDetailAdapter subjectDetailAdapter;
-    private SubjectAndSubjectInfoVO subjectAndSubjectInfoVO;
+    private SubjectAndSubjectInfoVO subjectAndSubjectInfoVO = new SubjectAndSubjectInfoVO();
 
     public SubjectDetailFragment(String subjectId) {
         this.subjectId = subjectId;
@@ -59,12 +59,13 @@ public class SubjectDetailFragment extends Fragment {
     private void initRecyclerView() {
         mRecyclerView = view.findViewById(R.id.re_fragment_subject_detail);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager linearLayoutManager =
+                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         subjectDetailAdapter = new SubjectDetailAdapter(subjectAndSubjectInfoVO, getActivity());
 
-        initData();
         mRecyclerView.setAdapter(subjectDetailAdapter);
+        initData();
     }
 
     private void initData() {

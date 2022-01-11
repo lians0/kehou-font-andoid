@@ -9,17 +9,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.example.kekoufontandroid.R;
-import com.example.kekoufontandroid.adapter.subject.SubjectDetailAdapter;
 import com.example.kekoufontandroid.adapter.subject.SubjectDetailRecordAdapter;
 import com.example.kekoufontandroid.diycommon.DiyGridview;
 import com.example.kekoufontandroid.domain.Course;
-import com.example.kekoufontandroid.domain.vo.SubjectAndSubjectInfoVO;
-import com.example.kekoufontandroid.utils.MyCallback;
+import com.example.kekoufontandroid.utils.RespCallback;
 import com.example.kekoufontandroid.utils.OkHttpUtil;
 
 import java.lang.reflect.Type;
@@ -57,7 +54,7 @@ public class SubjectDetailRecordFragment extends Fragment {
         subjectDetailRecordAdapter = new SubjectDetailRecordAdapter();
 
         diyGridview.setAdapter(subjectDetailRecordAdapter);
-        OkHttpUtil.asyGet("/course/getCourseList/" + subjectId, new MyCallback() {
+        OkHttpUtil.asyGet("/course/getCourseList/" + subjectId, new RespCallback() {
 
             @SuppressLint("NotifyDataSetChanged")
             @Override

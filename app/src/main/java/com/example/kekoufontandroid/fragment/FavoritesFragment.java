@@ -20,7 +20,7 @@ import com.example.kekoufontandroid.R;
 import com.example.kekoufontandroid.activity.SubjectDetailActivity;
 import com.example.kekoufontandroid.adapter.FavoritesAdapter;
 import com.example.kekoufontandroid.domain.Favorites;
-import com.example.kekoufontandroid.utils.MyCallback;
+import com.example.kekoufontandroid.utils.RespCallback;
 import com.example.kekoufontandroid.utils.OkHttpUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
@@ -105,7 +105,7 @@ public class FavoritesFragment extends Fragment {
      * 刷新
      */
     public void refresh() {
-        OkHttpUtil.asyGet("/favorites/getFavoritesByUsername", new MyCallback() {
+        OkHttpUtil.asyGet("/favorites/getFavoritesByUsername", new RespCallback() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onResponse(Call call, Response response) throws IOException {

@@ -1,14 +1,12 @@
 package com.example.kekoufontandroid.utils;
 
 import android.os.Looper;
-import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 
-import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -25,7 +23,6 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import lombok.SneakyThrows;
-import okhttp3.Callback;
 import okhttp3.ConnectionSpec;
 import okhttp3.FormBody;
 import okhttp3.MediaType;
@@ -164,7 +161,7 @@ public class OkHttpUtil {
     /**
      * 异步GET请求
      */
-    public static void asyGet(String url, MyCallback callback) {
+    public static void asyGet(String url, RespCallback callback) {
         try {
             Request request = new Request.Builder()
                     .addHeader("Auth", SPDataUtils.get(App.mContext) == null ? "null" : SPDataUtils.get(App.mContext))
@@ -181,7 +178,7 @@ public class OkHttpUtil {
     /**
      * 异步POST请求
      */
-    public static void asyPost(String url, Map<Object, Object> params, MyCallback callback) {
+    public static void asyPost(String url, Map<Object, Object> params, RespCallback callback) {
         try {
 
             String jsonStr = JSON.toJSONString(params);

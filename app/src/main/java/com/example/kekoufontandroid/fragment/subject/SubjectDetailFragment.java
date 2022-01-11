@@ -11,19 +11,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
-import com.bumptech.glide.Glide;
 import com.example.kekoufontandroid.R;
 import com.example.kekoufontandroid.adapter.subject.SubjectDetailAdapter;
 import com.example.kekoufontandroid.domain.vo.SubjectAndSubjectInfoVO;
-import com.example.kekoufontandroid.domain.vo.SubjectDetailVO;
-import com.example.kekoufontandroid.utils.App;
-import com.example.kekoufontandroid.utils.MyCallback;
+import com.example.kekoufontandroid.utils.RespCallback;
 import com.example.kekoufontandroid.utils.OkHttpUtil;
+
 
 import java.util.Objects;
 
@@ -52,25 +47,22 @@ public class SubjectDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_subject_detail, container, false);
         initRecyclerView();
-
         return view;
     }
 
     private void initRecyclerView() {
         mRecyclerView = view.findViewById(R.id.re_fragment_subject_detail);
-
         LinearLayoutManager linearLayoutManager =
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         subjectDetailAdapter = new SubjectDetailAdapter(subjectAndSubjectInfoVO, getActivity());
-
         mRecyclerView.setAdapter(subjectDetailAdapter);
         initData();
     }
 
     private void initData() {
         // 获取学科详情数据
-        OkHttpUtil.asyGet("/course/getCourseListAndSubjectInfo/" + subjectId, new MyCallback() {
+        OkHttpUtil.asyGet("/course/getCourseListAndSubjectInfo/" + subjectId, new RespCallback() {
 
             @SuppressLint("NotifyDataSetChanged")
             @Override
@@ -78,8 +70,12 @@ public class SubjectDetailFragment extends Fragment {
                 String data = OkHttpUtil.dealData(response);
                 System.out.println(data);
                 Log.d("okhttp", data);
-                subjectAndSubjectInfoVO = JSON.parseObject(data, SubjectAndSubjectInfoVO.class);
-                Log.d("okhttp", subjectAndSubjectInfoVO.toString());
+                SubjectAndSubjectInfoVO newVO = JSON.parseObject(data, SubjectAndSubjectInfoVO.class);
+                subjectDetailAdapter.setData(newVO);
+
+//                subjectAndSubjectInfoVO = JSON.parseObject(data, SubjectAndSubjectInfoVO.class);
+
+                Log.d("okhttp", SubjectDetailFragment.this.subjectAndSubjectInfoVO.toString());
 
                 //返回ui线程
                 Objects.requireNonNull(getActivity()).runOnUiThread(() -> {

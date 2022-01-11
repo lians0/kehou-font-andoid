@@ -37,13 +37,6 @@ public class SubjectDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
     public SubjectDetailAdapter(SubjectAndSubjectInfoVO data, Context context) {
         this.data = data;
         this.context = context;
-        this.data.setSubjectIcon("http://r5h5cd6ap.bkt.clouddn.com/java编程思想.jpg");
-        this.data.setSubjectDesc("111");
-        this.data.setSubjectName("111");
-        this.data.setCourseTotal(2);
-        this.data.setJoinTotal(3);
-        this.data.setTeacher("sefs");
-
     }
 
     /**
@@ -64,15 +57,19 @@ public class SubjectDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == FIRST_ITEM) {
-            View firstItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_subject_detail_first, parent, false);//解决宽度不能铺满
+            //解决宽度不能铺满
+            View firstItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_subject_detail_first, parent, false);
             return new FirstItemViewHolder(firstItem);
         } else {
-            View otherItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_record, parent, false);//解决宽度不能铺满
-//            View otherItem = View.inflate(context, R.layout.item_record, null);
+            //解决宽度不能铺满
+            View otherItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_record, parent, false);
             return new OtherItemViewHolder(otherItem);
         }
     }
 
+    /**
+     * 配置第一个与其他的不同
+     */
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
@@ -83,20 +80,22 @@ public class SubjectDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
             firstItemViewHolder.teacherName.setText(data.getTeacher());
             firstItemViewHolder.subjectDesc.setText(data.getSubjectDesc());
         } else {
-//            OtherItemViewHolder otherItemViewHolder = (OtherItemViewHolder) holder;
-//            List<SubjectAndSubjectInfoVO.CourseVO> courseList = data.getCourseList();
-//            SubjectAndSubjectInfoVO.CourseVO courseVO = courseList.get(position - 1);
-//            otherItemViewHolder.recordTitle.setText(courseVO.getCourseName());
-//            otherItemViewHolder.classAddr.setText("测试"+position);
-//            otherItemViewHolder.dataIndex.setText(position+"");
+            OtherItemViewHolder otherItemViewHolder = (OtherItemViewHolder) holder;
+            List<SubjectAndSubjectInfoVO.CourseVO> courseList = data.getCourseList();
+            SubjectAndSubjectInfoVO.CourseVO courseVO = courseList.get(position - 1);
+            otherItemViewHolder.recordTitle.setText(courseVO.getCourseName());
+            otherItemViewHolder.classAddr.setText("测试"+position);
+            otherItemViewHolder.dataIndex.setText(position+"");
         }
     }
 
-
     @Override
     public int getItemCount() {
-//        return data.getCourseList().size()+1;
-        return 3;
+        if (data.getCourseList()!=null) {
+            return data.getCourseList().size()+1;
+        }else {
+            return 0;
+        }
     }
 
     public class FirstItemViewHolder extends RecyclerView.ViewHolder {

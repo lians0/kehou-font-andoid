@@ -63,7 +63,6 @@ public class SubjectDetailFragment extends Fragment {
     private void initData() {
         // 获取学科详情数据
         OkHttpUtil.asyGet("/course/getCourseListAndSubjectInfo/" + subjectId, new RespCallback() {
-
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onResponse(Call call, Response response) {

@@ -49,6 +49,7 @@ public class MainActivity extends FragmentActivity {
 
     private void initData() {
         fragments = new ArrayList<>();
+        toolbar_tv.setText("记录");
         fragments.add(new HomeFragment());
         fragments.add(new FavoritesFragment());
         fragments.add(new NotificationFragment());
@@ -62,13 +63,13 @@ public class MainActivity extends FragmentActivity {
             if (itemId == R.id.home) {
                 // 第二个参数禁滑动动画
                 pagerView.setCurrentItem(0, false);
-                toolbar_tv.setText("Home");
+                toolbar_tv.setText("记录");
             } else if (itemId == R.id.msg) {
                 pagerView.setCurrentItem(1, false);
-                toolbar_tv.setText("记录");
+                toolbar_tv.setText("课程");
             } else if (itemId == R.id.mine) {
                 pagerView.setCurrentItem(2, false);
-                toolbar_tv.setText("我的");
+                toolbar_tv.setText("通知");
             }
             return true;
         });

@@ -205,18 +205,32 @@ public class OkHttpUtil {
         }
     }
 
+    public static void asyPost(String url, String jsonStr, RespCallback callback) {
+        try {
+            RequestBody body = FormBody.create(MediaType.parse("application/json"), jsonStr);
+
+            Request request = new Request.Builder()
+                    .addHeader("Auth", SPDataUtils.get(App.mContext) == null ? "null" : SPDataUtils.get(App.mContext))
+                    .addHeader("Connection", "close")
+                    .url(BASE_URL + url)
+                    .post(body)
+                    .build();
+
+            client.newCall(request).enqueue(callback);
+        } catch (Exception e) {
+            Log.d("okhttp", "ok http is error");
+            e.printStackTrace();
+        }
+    }
+
     /**
      * 处理响应数据
      * 返回data体中的json字符串
      */
     @SneakyThrows
     public static String dealData(Response response) {
-//        Log.d("okhttp", "1111"+response);
-
         assert response.body() != null;
-//        if (response.body()==null) {
-//            return "{}";
-//        }
+
         String responseString = response.body().string();
         Log.d("okhttp", responseString);
         Map<String, String> responseMap = JSON.parseObject(responseString, new TypeReference<HashMap<String, String>>() {

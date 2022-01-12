@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="test_type_spinner">
+        <item>考试</item>
+        <item>大作业</item>
+        <item>小论文</item>
+<!--        <item>php</item>-->
+<!--        <item>xml</item>-->
+<!--        <item>html</item>-->
+    </string-array>
+</resources>

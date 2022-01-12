@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,9 +13,11 @@ import androidx.fragment.app.Fragment;
 
 import com.example.kekoufontandroid.R;
 import com.example.kekoufontandroid.utils.OkHttpUtil;
-import com.example.kekoufontandroid.utils.SPDataUtils;
+import com.example.kekoufontandroid.utils.RespCallback;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -104,8 +105,15 @@ public class HomeFragment extends Fragment {
 
         });
         btn4.setOnClickListener(v->{
-            SPDataUtils.del(getActivity(),"token");
-            Toast.makeText(getActivity(),"del",Toast.LENGTH_SHORT).show();
+            Map<Object, Object> map = new HashMap<>();
+            map.put("name","lisi");
+            map.put("age","2");
+            OkHttpUtil.asyPost("/test", map, new RespCallback() {
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    Log.i("lian", "response:");
+                }
+            });
 
         });
 

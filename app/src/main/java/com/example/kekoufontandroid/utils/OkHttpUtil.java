@@ -15,6 +15,7 @@ import java.security.cert.X509Certificate;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
@@ -37,7 +38,7 @@ import okhttp3.TlsVersion;
  */
 public class OkHttpUtil {
     private static final OkHttpClient client = new OkHttpClient();
-    static final String BASE_URL ="http://192.168.238.169:8081";
+    static final String BASE_URL = "http://192.168.53.169:8081";
 
 
     /**
@@ -127,6 +128,7 @@ public class OkHttpUtil {
 
     /**
      * 同步POST请求
+     *
      * @param params 参数map
      */
     public static String synPost(String url, Map<String, String> params) {
@@ -180,15 +182,20 @@ public class OkHttpUtil {
      */
     public static void asyPost(String url, Map<Object, Object> params, RespCallback callback) {
         try {
+            FormBody.Builder builder = new FormBody.Builder();
+            for (Map.Entry<Object, Object> entry : params.entrySet()) {
+                builder.add(entry.getKey().toString(), entry.getValue().toString());
+            }
+            FormBody build = builder.build();
 
             String jsonStr = JSON.toJSONString(params);
-            RequestBody body = FormBody.create(MediaType.parse("application/json"), jsonStr);
+            RequestBody body = FormBody.create(MediaType.parse("application/x-www-form-urlencoded"), jsonStr);
+
             Request request = new Request.Builder()
-                    .url(BASE_URL + url)
-                    .addHeader("Content-Type", "application/json")
-                    .addHeader("Connection", "close")
                     .addHeader("Auth", SPDataUtils.get(App.mContext) == null ? "null" : SPDataUtils.get(App.mContext))
-                    .post(body)
+                    .addHeader("Connection", "close")
+                    .url(BASE_URL + url)
+                    .post(build)
                     .build();
 
             client.newCall(request).enqueue(callback);
@@ -216,7 +223,9 @@ public class OkHttpUtil {
         });
         String code = responseMap.get("code");
         if (!"200".equals(code)) {
+            Looper.prepare();
             Toast.makeText(App.mContext, responseMap.get("msg"), Toast.LENGTH_SHORT).show();
+            Looper.loop();
 //            throw new RuntimeException(responseMap.get("msg"));
         }
         return responseMap.get("data");

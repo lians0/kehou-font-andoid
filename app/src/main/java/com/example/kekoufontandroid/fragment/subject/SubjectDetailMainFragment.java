@@ -31,14 +31,14 @@ import okhttp3.Response;
  * 请求获取数据
  * 配置RecycleView布局
  */
-public class SubjectDetailFragment extends Fragment {
+public class SubjectDetailMainFragment extends Fragment {
     private String subjectId;
     private View view;
     private RecyclerView mRecyclerView;
     private SubjectDetailMainAdapter subjectDetailAdapter;
     private SubjectAndSubjectInfoVO subjectAndSubjectInfoVO = new SubjectAndSubjectInfoVO();
 
-    public SubjectDetailFragment(String subjectId) {
+    public SubjectDetailMainFragment(String subjectId) {
         this.subjectId = subjectId;
     }
 
@@ -74,7 +74,7 @@ public class SubjectDetailFragment extends Fragment {
 
 //                subjectAndSubjectInfoVO = JSON.parseObject(data, SubjectAndSubjectInfoVO.class);
 
-                Log.d("okhttp", SubjectDetailFragment.this.subjectAndSubjectInfoVO.toString());
+                Log.d("okhttp", SubjectDetailMainFragment.this.subjectAndSubjectInfoVO.toString());
 
                 //返回ui线程
                 Objects.requireNonNull(getActivity()).runOnUiThread(() -> {

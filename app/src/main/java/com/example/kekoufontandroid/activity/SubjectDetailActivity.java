@@ -10,7 +10,7 @@ import android.os.Bundle;
 import com.example.kekoufontandroid.R;
 import com.example.kekoufontandroid.adapter.subject.SubjectDetailPagerAdapter;
 import com.example.kekoufontandroid.fragment.subject.SubjectDetailCommentFragment;
-import com.example.kekoufontandroid.fragment.subject.SubjectDetailFragment;
+import com.example.kekoufontandroid.fragment.subject.SubjectDetailMainFragment;
 import com.example.kekoufontandroid.fragment.subject.SubjectDetailRecordFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -55,7 +55,7 @@ public class SubjectDetailActivity extends AppCompatActivity {
         titles.add("记录");
         titles.add("学科评价");
         fragments = new ArrayList<>();
-        fragments.add(new SubjectDetailFragment(subjectId));
+        fragments.add(new SubjectDetailMainFragment(subjectId));
         fragments.add(new SubjectDetailRecordFragment(subjectId));
         fragments.add(new SubjectDetailCommentFragment(subjectId));
         subject_detail_pager2.setAdapter(new SubjectDetailPagerAdapter(getSupportFragmentManager(), getLifecycle(), fragments));

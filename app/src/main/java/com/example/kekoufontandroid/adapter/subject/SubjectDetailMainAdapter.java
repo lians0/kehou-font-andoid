@@ -24,12 +24,12 @@ import java.util.List;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Setter;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Setter
 public class SubjectDetailMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private SubjectAndSubjectInfoVO data ;
+    private SubjectAndSubjectInfoVO data;
     private final Context context;
 
     private final int FIRST_ITEM = 0;
@@ -84,18 +84,14 @@ public class SubjectDetailMainAdapter extends RecyclerView.Adapter<RecyclerView.
             List<SubjectAndSubjectInfoVO.CourseVO> courseList = data.getCourseList();
             SubjectAndSubjectInfoVO.CourseVO courseVO = courseList.get(position - 1);
             otherItemViewHolder.recordTitle.setText(courseVO.getCourseName());
-            otherItemViewHolder.classAddr.setText("测试"+position);
-            otherItemViewHolder.dataIndex.setText(position+"");
+            otherItemViewHolder.classAddr.setText("测试" + position);
+            otherItemViewHolder.dataIndex.setText(position + "");
         }
     }
 
     @Override
     public int getItemCount() {
-        if (data.getCourseList()!=null) {
-            return data.getCourseList().size()+1;
-        }else {
-            return 0;
-        }
+        return data.getCourseList() != null ? data.getCourseList().size() + 1 : 0;
     }
 
     public class FirstItemViewHolder extends RecyclerView.ViewHolder {

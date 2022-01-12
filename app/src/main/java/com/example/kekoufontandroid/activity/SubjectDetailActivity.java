@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.kekoufontandroid.R;
-import com.example.kekoufontandroid.adapter.subject.SubjectDetailMainAdapter;
+import com.example.kekoufontandroid.adapter.subject.SubjectDetailCommentAdapter;
 import com.example.kekoufontandroid.fragment.subject.SubjectDetailCommentFragment;
 import com.example.kekoufontandroid.fragment.subject.SubjectDetailFragment;
 import com.example.kekoufontandroid.fragment.subject.SubjectDetailRecordFragment;
@@ -58,7 +58,7 @@ public class SubjectDetailActivity extends AppCompatActivity {
         fragments.add(new SubjectDetailFragment(subjectId));
         fragments.add(new SubjectDetailRecordFragment(subjectId));
         fragments.add(new SubjectDetailCommentFragment(subjectId));
-        subject_detail_pager2.setAdapter(new SubjectDetailMainAdapter(getSupportFragmentManager(), getLifecycle(), fragments));
+        subject_detail_pager2.setAdapter(new SubjectDetailCommentAdapter(getSupportFragmentManager(), getLifecycle(), fragments));
     }
 
     private void initListener() {

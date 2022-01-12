@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 
 import com.alibaba.fastjson.JSON;
 import com.example.kekoufontandroid.R;
-import com.example.kekoufontandroid.adapter.subject.SubjectDetailAdapter;
+import com.example.kekoufontandroid.adapter.subject.SubjectDetailMainAdapter;
 import com.example.kekoufontandroid.domain.vo.SubjectAndSubjectInfoVO;
 import com.example.kekoufontandroid.utils.RespCallback;
 import com.example.kekoufontandroid.utils.OkHttpUtil;
@@ -35,7 +35,7 @@ public class SubjectDetailFragment extends Fragment {
     private String subjectId;
     private View view;
     private RecyclerView mRecyclerView;
-    private SubjectDetailAdapter subjectDetailAdapter;
+    private SubjectDetailMainAdapter subjectDetailAdapter;
     private SubjectAndSubjectInfoVO subjectAndSubjectInfoVO = new SubjectAndSubjectInfoVO();
 
     public SubjectDetailFragment(String subjectId) {
@@ -55,7 +55,7 @@ public class SubjectDetailFragment extends Fragment {
         LinearLayoutManager linearLayoutManager =
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        subjectDetailAdapter = new SubjectDetailAdapter(subjectAndSubjectInfoVO, getActivity());
+        subjectDetailAdapter = new SubjectDetailMainAdapter(subjectAndSubjectInfoVO, getActivity());
         mRecyclerView.setAdapter(subjectDetailAdapter);
         initData();
     }

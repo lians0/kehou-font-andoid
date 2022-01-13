@@ -45,9 +45,14 @@ public class SubjectDetailCommentAdapter extends RecyclerView.Adapter<RecyclerVi
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ItemViewHolder itemHolder = (ItemViewHolder) holder;
-        itemHolder.semester.setText(data.get(position).getSemesterId().toString());
-        itemHolder.testType.setText(data.get(position).getTestType());
-        itemHolder.commentCourse.setText(data.get(position).getCommentText());
+//        if (data!=null) {
+
+            CommentCourse commentCourse = data.get(position);
+
+            itemHolder.semester.setText(commentCourse.getSemesterId()!=null?commentCourse.getSemesterId().toString():"");
+            itemHolder.testType.setText(commentCourse.getTestType()!=null?commentCourse.getTestType():"");
+            itemHolder.commentCourse.setText(commentCourse.getCommentText()!=null?commentCourse.getCommentText():"");
+//        }
 
     }
 

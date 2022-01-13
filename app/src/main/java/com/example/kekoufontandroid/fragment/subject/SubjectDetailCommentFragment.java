@@ -30,6 +30,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -41,7 +42,7 @@ public class SubjectDetailCommentFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private String subjectId;
     private View view;
-    private List<CommentCourse> commentList;
+    private List<CommentCourse> commentList ;
     private SubjectDetailCommentAdapter subjectDetailCommentAdapter;
 
     public SubjectDetailCommentFragment(String subjectId) {

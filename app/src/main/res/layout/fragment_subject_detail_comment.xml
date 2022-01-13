@@ -19,16 +19,38 @@
         app:srcCompat="@android:drawable/ic_input_add"
         android:contentDescription="add comment"
         android:focusable="true" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/re_fragment_subject_detail_comment"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/subject_detail_comment_sr"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:srlAccentColor="#00000000"
+        app:srlEnablePreviewInEditMode="true"
+        app:srlPrimaryColor="#00000000">
+
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srlAccentColor="@color/black" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/re_fragment_subject_detail_comment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+
+
+<!--        <com.scwang.smartrefresh.layout.footer.ClassicsFooter-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:srlAccentColor="@color/black" />-->
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

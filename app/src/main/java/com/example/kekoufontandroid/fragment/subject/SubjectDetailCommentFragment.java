@@ -1,8 +1,6 @@
 package com.example.kekoufontandroid.fragment.subject;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -21,16 +19,14 @@ import com.alibaba.fastjson.TypeReference;
 import com.example.kekoufontandroid.R;
 import com.example.kekoufontandroid.activity.CommentActivity;
 import com.example.kekoufontandroid.adapter.subject.SubjectDetailCommentAdapter;
-import com.example.kekoufontandroid.adapter.subject.SubjectDetailMainAdapter;
 import com.example.kekoufontandroid.domain.CommentCourse;
-import com.example.kekoufontandroid.domain.vo.SubjectAndSubjectInfoVO;
 import com.example.kekoufontandroid.utils.OkHttpUtil;
 import com.example.kekoufontandroid.utils.RespCallback;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -54,12 +50,13 @@ public class SubjectDetailCommentFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_subject_detail_comment, container, false);
 //        Toast.makeText(getActivity(),subjectId,Toast.LENGTH_SHORT).show();
-        initView();
+        initFloatingButton();
         initRecyclerView();
         return view;
     }
 
-    private void initView() {
+    private void initFloatingButton() {
+
         FloatingActionButton floatingActionButton = view.findViewById(R.id.floatingButton_fragment_subject_detail_comment);
         floatingActionButton.setOnClickListener(v -> {
 
@@ -75,6 +72,13 @@ public class SubjectDetailCommentFragment extends Fragment {
 
 
     private void initRecyclerView() {
+        SmartRefreshLayout subjectDetailCommentSr = view.findViewById(R.id.subject_detail_comment_sr);
+        subjectDetailCommentSr.setOnRefreshListener(refreshLayout -> {
+            Toast.makeText(getActivity(), "刷新", Toast.LENGTH_SHORT).show();
+            initData();
+            refreshLayout.finishRefresh();
+        });
+
         mRecyclerView = view.findViewById(R.id.re_fragment_subject_detail_comment);
         LinearLayoutManager linearLayoutManager =
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);

@@ -16,6 +16,7 @@ import com.example.kekoufontandroid.R;
 import com.example.kekoufontandroid.adapter.subject.SubjectDetailRecordAdapter;
 import com.example.kekoufontandroid.diycommon.DiyGridview;
 import com.example.kekoufontandroid.domain.Course;
+import com.example.kekoufontandroid.domain.vo.CourseAndIsJoinVO;
 import com.example.kekoufontandroid.utils.RespCallback;
 import com.example.kekoufontandroid.utils.OkHttpUtil;
 
@@ -62,17 +63,15 @@ public class SubjectDetailRecordFragment extends Fragment {
                 String data = OkHttpUtil.dealData(response);
                 System.out.println(data);
                 Log.d("okhttp", data);
-                Type listType = (Type) new TypeReference<List<Course>>() {
+                Type listType = new TypeReference<List<CourseAndIsJoinVO>>() {
                 }.getType();
-                List<Course> courseList = JSON.parseObject(data, listType);
+                List<CourseAndIsJoinVO> courseList = JSON.parseObject(data, listType);
                 Log.d("okhttp", courseList.toString());
                 subjectDetailRecordAdapter.setData(courseList);
 
                 //返回ui线程
                 Objects.requireNonNull(getActivity()).runOnUiThread(() -> {
                     subjectDetailRecordAdapter.notifyDataSetChanged();
-//                    diyGridview.setAdapter(subjectDetailRecordAdapter);
-//                    subjectDetailRecordAdapter.notifyDataSetChanged();
                 });
             }
         });

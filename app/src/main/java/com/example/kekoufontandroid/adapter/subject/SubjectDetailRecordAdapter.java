@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.example.kekoufontandroid.R;
-import com.example.kekoufontandroid.domain.Course;
+import com.example.kekoufontandroid.domain.vo.CourseAndIsJoinVO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class SubjectDetailRecordAdapter extends BaseAdapter {
-    private List<Course> data = new ArrayList<>();
+    private List<CourseAndIsJoinVO> data = new ArrayList<>();
 
     @SuppressLint("ViewHolder")
     private View recordItemView;

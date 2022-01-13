@@ -5,6 +5,11 @@ import lombok.Data;
 import java.util.Date;
 import java.util.List;
 
+import lombok.Data;
+
+import java.util.Date;
+import java.util.List;
+
 /**
  * @author ShuangLian
  * @date 2021/12/20 19:28
@@ -25,8 +30,14 @@ public class SubjectAndSubjectInfoVO {
      * 该科目的总课程数
      */
     private int courseTotal;
-
-    List<CourseVO> courseList;
+    /**
+     * 当前用具是否已参加课程
+     */
+    private boolean isJoin;
+    /**
+     * 当前课程的所有课程
+     */
+    private List<CourseVO> courseList;
 
     @Data
     public static class CourseVO {

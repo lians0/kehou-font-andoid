@@ -1,5 +1,6 @@
 package com.example.kekoufontandroid.activity;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -71,6 +72,7 @@ public class MainActivity extends FragmentActivity {
         pagerView.setAdapter(new MainViewPagerAdapter(getSupportFragmentManager(), getLifecycle(), fragments));
     }
 
+    @SuppressLint("NonConstantResourceId")
     private void initListener() {
         // BottomNavigationView Listener
         navView.setOnNavigationItemSelectedListener(item -> {
@@ -136,10 +138,4 @@ public class MainActivity extends FragmentActivity {
 //
 //        });
     }
-
-
-//    @Override
-//    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//        Toast.makeText(view.getContext(),"del"+position,Toast.LENGTH_SHORT).show();
-//    }
 }

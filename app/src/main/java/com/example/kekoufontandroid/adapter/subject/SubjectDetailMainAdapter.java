@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +16,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.donkingliang.labels.LabelsView;
 import com.example.kekoufontandroid.R;
 import com.example.kekoufontandroid.adapter.FavoritesAdapter;
 import com.example.kekoufontandroid.domain.dto.SubjectDetailDTO;
 import com.example.kekoufontandroid.domain.vo.SubjectAndSubjectInfoVO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Data;
@@ -83,9 +86,28 @@ public class SubjectDetailMainAdapter extends RecyclerView.Adapter<RecyclerView.
             OtherItemViewHolder otherItemViewHolder = (OtherItemViewHolder) holder;
             List<SubjectAndSubjectInfoVO.CourseVO> courseList = data.getCourseList();
             SubjectAndSubjectInfoVO.CourseVO courseVO = courseList.get(position - 1);
+
             otherItemViewHolder.recordTitle.setText(courseVO.getCourseName());
             otherItemViewHolder.classAddr.setText("测试" + position);
             otherItemViewHolder.dataIndex.setText(position + "");
+
+            otherItemViewHolder.labelsView.setIndicator(true);
+            ArrayList<String> strings = new ArrayList<>();
+            if (courseList.get(position-1).isJoin()) {
+                strings.add("已参加");
+                strings.add("已参加");
+                otherItemViewHolder.labelsView.setLabels(strings);
+                otherItemViewHolder.labelsView.setTextBold(true);
+                otherItemViewHolder.labelsView.setSelects(0);
+                otherItemViewHolder.labelsView.setLabelBackgroundResource(R.drawable.label_bg);
+                List<Integer> selectLabels = otherItemViewHolder.labelsView.getSelectLabels();
+                Log.d("test",selectLabels.toString());
+                System.out.println(selectLabels);
+            }else{
+                strings.add("未参加");
+                otherItemViewHolder.labelsView.setLabels(strings);
+//                otherItemViewHolder.labelsView.clearAllSelect();
+            }
         }
     }
 
@@ -102,6 +124,7 @@ public class SubjectDetailMainAdapter extends RecyclerView.Adapter<RecyclerView.
         public TextView subjectDesc;
         public Button isJoin;
 
+
         public FirstItemViewHolder(@NonNull View itemView) {
             super(itemView);
             bookImage = (ImageView) itemView.findViewById(R.id.imView_book_view);
@@ -109,6 +132,7 @@ public class SubjectDetailMainAdapter extends RecyclerView.Adapter<RecyclerView.
             teacherName = (TextView) itemView.findViewById(R.id.tv_teacherName);
             subjectDesc = (TextView) itemView.findViewById(R.id.tv_item_subject_detail_first_subjectDesc);
             isJoin = (Button) itemView.findViewById(R.id.btn_isJoin);
+
         }
     }
 
@@ -117,9 +141,11 @@ public class SubjectDetailMainAdapter extends RecyclerView.Adapter<RecyclerView.
         public TextView recordTitle;
         public TextView classAddr;
         public TextView dataIndex;
+        private LabelsView labelsView;
 
         public OtherItemViewHolder(@NonNull View itemView) {
             super(itemView);
+            labelsView = (LabelsView) itemView.findViewById(R.id.labels_item_record);
             dataIndex = (TextView) itemView.findViewById(R.id.tv_data_index);
             classAddr = (TextView) itemView.findViewById(R.id.tv_class_addr);
             recordTitle = (TextView) itemView.findViewById(R.id.tv_record_title);

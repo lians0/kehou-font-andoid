@@ -14,7 +14,6 @@ import java.util.List;
 public class MainViewPagerAdapter extends FragmentStateAdapter {
     List<Fragment> fragments;
 
-
     public MainViewPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, List<Fragment> fragments) {
         super(fragmentManager, lifecycle);
         this.fragments = fragments;

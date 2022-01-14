@@ -47,11 +47,11 @@ public class SubjectDetailCommentAdapter extends RecyclerView.Adapter<RecyclerVi
         ItemViewHolder itemHolder = (ItemViewHolder) holder;
 //        if (data!=null) {
 
-            CommentCourse commentCourse = data.get(position);
+        CommentCourse commentCourse = data.get(position);
 
-            itemHolder.semester.setText(commentCourse.getSemesterId()!=null?commentCourse.getSemesterId().toString():"");
-            itemHolder.testType.setText(commentCourse.getTestType()!=null?commentCourse.getTestType():"");
-            itemHolder.commentCourse.setText(commentCourse.getCommentText()!=null?commentCourse.getCommentText():"");
+        itemHolder.semester.setText(commentCourse.getSemesterId() != null ? commentCourse.getSemesterId().toString() : "");
+        itemHolder.testType.setText(commentCourse.getTestType() != null ? commentCourse.getTestType() : "");
+        itemHolder.commentCourse.setText(commentCourse.getCommentText() != null ? commentCourse.getCommentText() : "");
 //        }
 
     }
@@ -70,9 +70,9 @@ public class SubjectDetailCommentAdapter extends RecyclerView.Adapter<RecyclerVi
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            testType = (TextView) itemView.findViewById(R.id.test_type);
-            semester = (TextView) itemView.findViewById(R.id.semester);
-            commentCourse = (TextView) itemView.findViewById(R.id.comment_course);
+            testType = itemView.findViewById(R.id.test_type);
+            semester = itemView.findViewById(R.id.semester);
+            commentCourse = itemView.findViewById(R.id.comment_course);
 
         }
     }

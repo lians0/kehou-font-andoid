@@ -71,9 +71,7 @@ public class SubjectDetailMainFragment extends Fragment {
                 Log.d("okhttp", data);
                 SubjectAndSubjectInfoVO newVO = JSON.parseObject(data, SubjectAndSubjectInfoVO.class);
                 subjectDetailAdapter.setData(newVO);
-
 //                subjectAndSubjectInfoVO = JSON.parseObject(data, SubjectAndSubjectInfoVO.class);
-
                 Log.d("okhttp", newVO.toString());
 
                 //返回ui线程

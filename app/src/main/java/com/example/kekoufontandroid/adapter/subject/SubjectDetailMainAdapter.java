@@ -93,7 +93,7 @@ public class SubjectDetailMainAdapter extends RecyclerView.Adapter<RecyclerView.
 
             otherItemViewHolder.labelsView.setIndicator(true);
             ArrayList<String> strings = new ArrayList<>();
-            if (courseList.get(position-1).isJoin()) {
+            if (courseList.get(position - 1).isJoin()) {
                 strings.add("已参加");
                 strings.add("已参加");
                 otherItemViewHolder.labelsView.setLabels(strings);
@@ -101,9 +101,9 @@ public class SubjectDetailMainAdapter extends RecyclerView.Adapter<RecyclerView.
                 otherItemViewHolder.labelsView.setSelects(0);
                 otherItemViewHolder.labelsView.setLabelBackgroundResource(R.drawable.label_bg);
                 List<Integer> selectLabels = otherItemViewHolder.labelsView.getSelectLabels();
-                Log.d("test",selectLabels.toString());
+                Log.d("test", selectLabels.toString());
                 System.out.println(selectLabels);
-            }else{
+            } else {
                 strings.add("未参加");
                 otherItemViewHolder.labelsView.setLabels(strings);
 //                otherItemViewHolder.labelsView.clearAllSelect();
@@ -116,6 +116,9 @@ public class SubjectDetailMainAdapter extends RecyclerView.Adapter<RecyclerView.
         return data.getCourseList() != null ? data.getCourseList().size() + 1 : 0;
     }
 
+    /**
+     * 第一个元素的ViewHolder
+     */
     public class FirstItemViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView bookImage;
@@ -127,28 +130,30 @@ public class SubjectDetailMainAdapter extends RecyclerView.Adapter<RecyclerView.
 
         public FirstItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            bookImage = (ImageView) itemView.findViewById(R.id.imView_book_view);
-            joinTotal = (TextView) itemView.findViewById(R.id.tv_joinTotal);
-            teacherName = (TextView) itemView.findViewById(R.id.tv_teacherName);
-            subjectDesc = (TextView) itemView.findViewById(R.id.tv_item_subject_detail_first_subjectDesc);
-            isJoin = (Button) itemView.findViewById(R.id.btn_isJoin);
-
+            bookImage = itemView.findViewById(R.id.imView_book_view);
+            joinTotal = itemView.findViewById(R.id.tv_joinTotal);
+            teacherName = itemView.findViewById(R.id.tv_teacherName);
+            subjectDesc = itemView.findViewById(R.id.tv_item_subject_detail_first_subjectDesc);
+            isJoin = itemView.findViewById(R.id.btn_isJoin);
         }
     }
 
+    /**
+     * 其他元素的ViewHolder
+     */
     public class OtherItemViewHolder extends RecyclerView.ViewHolder {
 
         public TextView recordTitle;
         public TextView classAddr;
         public TextView dataIndex;
-        private LabelsView labelsView;
+        private final LabelsView labelsView;
 
         public OtherItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            labelsView = (LabelsView) itemView.findViewById(R.id.labels_item_record);
-            dataIndex = (TextView) itemView.findViewById(R.id.tv_data_index);
-            classAddr = (TextView) itemView.findViewById(R.id.tv_class_addr);
-            recordTitle = (TextView) itemView.findViewById(R.id.tv_record_title);
+            labelsView = itemView.findViewById(R.id.labels_item_record);
+            dataIndex = itemView.findViewById(R.id.tv_data_index);
+            classAddr = itemView.findViewById(R.id.tv_class_addr);
+            recordTitle = itemView.findViewById(R.id.tv_record_title);
 
         }
     }

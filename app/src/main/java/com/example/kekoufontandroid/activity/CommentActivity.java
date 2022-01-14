@@ -71,7 +71,8 @@ public class CommentActivity extends AppCompatActivity {
             OkHttpUtil.asyPost("/commentCourse/addCommentCourse", JSON.toJSONString(map), new RespCallback() {
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
-                    finish();
+                    CommentActivity.this.setResult(0);
+                    CommentActivity.this.finish();
                 }
             });
         });

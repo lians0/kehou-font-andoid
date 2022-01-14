@@ -148,14 +148,31 @@ public class SubjectDetailMainAdapter extends RecyclerView.Adapter<RecyclerView.
         public TextView dataIndex;
         private final LabelsView labelsView;
 
+
         public OtherItemViewHolder(@NonNull View itemView) {
             super(itemView);
             labelsView = itemView.findViewById(R.id.labels_item_record);
             dataIndex = itemView.findViewById(R.id.tv_data_index);
             classAddr = itemView.findViewById(R.id.tv_class_addr);
             recordTitle = itemView.findViewById(R.id.tv_record_title);
+            // 设置课程记录的点击事件 利用回调机制 将触发函数写在Fragment中
+            itemView.setOnClickListener(v -> {
+                if (mOnItemClickListener != null)
+                    mOnItemClickListener.OnRecyclerItemClick(getAdapterPosition());
+                Log.d("lian", "OnRecyclerItemClick" + getAdapterPosition());
+            });
 
         }
+    }
+
+    private SubjectDetailMainAdapter.OnRecyclerItemClickListener mOnItemClickListener;
+
+    public void setOnItemClickListener(SubjectDetailMainAdapter.OnRecyclerItemClickListener listener) {
+        mOnItemClickListener = listener;
+    }
+
+    public interface OnRecyclerItemClickListener {
+        void OnRecyclerItemClick(int position);
     }
 
 

@@ -57,6 +57,14 @@ public class SubjectDetailMainFragment extends Fragment {
         mRecyclerView.setLayoutManager(linearLayoutManager);
         subjectDetailAdapter = new SubjectDetailMainAdapter(subjectAndSubjectInfoVO, getActivity());
         mRecyclerView.setAdapter(subjectDetailAdapter);
+
+        // 这里处理课程记录item的点击事件
+        subjectDetailAdapter.setOnItemClickListener(position -> {
+            String itemSubjectId = subjectAndSubjectInfoVO.getCourseList().get(position - 1).getSubjectId().toString();
+            Log.d("test",itemSubjectId);
+            // todo： 跳转到课程详情
+
+        });
         initData();
     }
 
@@ -70,6 +78,7 @@ public class SubjectDetailMainFragment extends Fragment {
                 System.out.println(data);
                 Log.d("okhttp", data);
                 SubjectAndSubjectInfoVO newVO = JSON.parseObject(data, SubjectAndSubjectInfoVO.class);
+                subjectAndSubjectInfoVO = newVO;
                 subjectDetailAdapter.setData(newVO);
 //                subjectAndSubjectInfoVO = JSON.parseObject(data, SubjectAndSubjectInfoVO.class);
                 Log.d("okhttp", newVO.toString());

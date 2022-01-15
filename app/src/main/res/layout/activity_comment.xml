@@ -15,7 +15,15 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+        <TextView
+            android:id="@+id/comment_toolbar_tv"
+            style="@style/style_toolbar_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            />
+    </androidx.appcompat.widget.Toolbar>
 
     <TextView
         android:id="@+id/textView4"

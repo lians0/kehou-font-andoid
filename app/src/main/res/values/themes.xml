@@ -3,8 +3,12 @@
     <!--继承NoActionBar-->
     <style name="Theme.Kekoufontandroid" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+<!--        <item name="colorPrimary">@color/purple_500</item>-->
+        <item name="colorPrimary">#2e8abb</item> <!--浅蓝色-->
+<!--        <item name="colorPrimaryDark">#2e8abb</item> &lt;!&ndash;深蓝色&ndash;&gt;-->
+
+<!--        <item name="colorPrimaryVariant">@color/purple_700</item>-->
+        <item name="colorPrimaryVariant">#3A5FCD</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>

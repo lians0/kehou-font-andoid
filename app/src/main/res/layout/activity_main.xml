@@ -29,7 +29,7 @@
 
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/main_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
@@ -41,7 +41,7 @@
             app:titleTextColor="@color/white">
 
             <TextView
-                android:id="@+id/toolbar_tv"
+                android:id="@+id/main_toolbar_tv"
                 style="@style/style_toolbar_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
             android:layout_marginBottom="1dp"
             app:layout_constraintBottom_toTopOf="@+id/nav_view"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+            app:layout_constraintTop_toBottomOf="@+id/main_toolbar">
 
         </androidx.viewpager2.widget.ViewPager2>
 

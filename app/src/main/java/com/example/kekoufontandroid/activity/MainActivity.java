@@ -2,18 +2,11 @@ package com.example.kekoufontandroid.activity;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -57,7 +50,7 @@ public class MainActivity extends FragmentActivity {
     private void initView() {
         pagerView = findViewById(R.id.pager_view);
         navView = findViewById(R.id.nav_view);
-        toolbar_tv = findViewById(R.id.toolbar_tv);
+        toolbar_tv = findViewById(R.id.main_toolbar_tv);
         navLeftView = findViewById(R.id.nav_left_view);
         drawerLayout = findViewById(R.id.drawer_layout);
 

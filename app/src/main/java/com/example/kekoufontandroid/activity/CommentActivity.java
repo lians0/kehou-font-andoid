@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -34,6 +35,7 @@ public class CommentActivity extends AppCompatActivity {
     private EditText editText;
     private Spinner spinner;
     private Button btn;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,13 +50,13 @@ public class CommentActivity extends AppCompatActivity {
         initView();
         initListener();
 
-
     }
 
     private void initView() {
         spinner = findViewById(R.id.spinner_activity_comment);
         editText = findViewById(R.id.editText_activity_comment);
         btn = findViewById(R.id.btn_activity_comment);
+        toolbar = (Toolbar) findViewById(R.id.comment_toolbar);
     }
 
     private void initListener(){

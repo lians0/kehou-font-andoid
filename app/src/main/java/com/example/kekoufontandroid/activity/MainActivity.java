@@ -4,8 +4,13 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -23,15 +28,16 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends AppCompatActivity {
     BottomNavigationView navView;
     ViewPager2 pagerView;
     List<Fragment> fragments;
     TextView toolbar_tv;
     private NavigationView navLeftView;
     private DrawerLayout drawerLayout;
-
+    private Toolbar mainToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +59,16 @@ public class MainActivity extends FragmentActivity {
         toolbar_tv = findViewById(R.id.main_toolbar_tv);
         navLeftView = findViewById(R.id.nav_left_view);
         drawerLayout = findViewById(R.id.drawer_layout);
-
+        mainToolbar = (Toolbar) findViewById(R.id.main_toolbar);
     }
 
     private void initData() {
+//        mainToolbar.setTitle("");
+//        mainToolbar.setSubtitle("子标题");
+        setSupportActionBar(mainToolbar);
+        //设置是否显示toolbar的标题
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+
         fragments = new ArrayList<>();
         toolbar_tv.setText("记录");
         fragments.add(new HomeFragment());
@@ -67,7 +79,19 @@ public class MainActivity extends FragmentActivity {
 
     @SuppressLint("NonConstantResourceId")
     private void initListener() {
-        // BottomNavigationView Listener
+        // 设置toolbar上的按钮的事件
+        mainToolbar.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.search_main:
+                    Toast.makeText(MainActivity.this, "Search !", Toast.LENGTH_SHORT).show();
+                    // 跳转搜索页面
+                    break;
+            }
+            return true;
+        });
+
+
+        // 主页下部的BottomNavigationView 事件
         navView.setOnNavigationItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.home) {
@@ -84,23 +108,22 @@ public class MainActivity extends FragmentActivity {
             return true;
         });
 
-        //
+        // 设置主页下部的BottomNavigationView和中部的ViewPage联动
         pagerView.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageScrollStateChanged(int state) {
                 super.onPageScrollStateChanged(state);
             }
-
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
                 navView.getMenu().getItem(position).setChecked(true);
             }
         });
-        //禁止滑动
+        // 设置禁止滑动
         pagerView.setUserInputEnabled(false);
 
-        //为左侧划出菜单添加事件
+        // 为左侧划出菜单添加事件
         navLeftView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.nav_left_menu_logout:
@@ -119,7 +142,6 @@ public class MainActivity extends FragmentActivity {
                             .show();
                     break;
 
-
             }
             // 设置侧边菜单内是否有多选结构 false没有多选结构
             item.setCheckable(false);
@@ -127,8 +149,21 @@ public class MainActivity extends FragmentActivity {
 //            drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         });
+
 //        toolbar.setNavigationOnClickListener(()->{
 //
 //        });
     }
+
+    /**
+     * 设置toolbar菜单，不用改动
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        return true;
+    }
+
 }

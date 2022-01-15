@@ -20,5 +20,6 @@
 
         <!--状态栏透明 系统占用状态栏部分-->
 <!--        <item name="android:windowTranslucentStatus">true</item>-->
+
     </style>
 </resources>

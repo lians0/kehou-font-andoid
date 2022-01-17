@@ -2,8 +2,7 @@ package com.example.kekoufontandroid.adapter.subject;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,15 +17,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.donkingliang.labels.LabelsView;
 import com.example.kekoufontandroid.R;
-import com.example.kekoufontandroid.adapter.FavoritesAdapter;
-import com.example.kekoufontandroid.domain.dto.SubjectDetailDTO;
 import com.example.kekoufontandroid.domain.vo.SubjectAndSubjectInfoVO;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.Setter;
 
 @Setter
@@ -82,6 +77,21 @@ public class SubjectDetailMainAdapter extends RecyclerView.Adapter<RecyclerView.
             firstItemViewHolder.joinTotal.setText(data.getJoinTotal() + "");
             firstItemViewHolder.teacherName.setText(data.getTeacher());
             firstItemViewHolder.subjectDesc.setText(data.getSubjectDesc());
+            //已经参与 设置按钮样式
+            if (data.isJoin()) {
+                Log.d("test", "已参加");
+                Button isJoinBtn = firstItemViewHolder.isJoin;
+                isJoinBtn.setBackgroundResource(R.drawable.btn_join);
+                isJoinBtn.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        isJoinBtn.setTextColor( Color.parseColor("#ffffff"));
+                        isJoinBtn.setBackgroundResource(R.drawable.btn_not_join);
+                    }
+                });
+            }
+
         } else {
             OtherItemViewHolder otherItemViewHolder = (OtherItemViewHolder) holder;
             List<SubjectAndSubjectInfoVO.CourseVO> courseList = data.getCourseList();
@@ -91,6 +101,7 @@ public class SubjectDetailMainAdapter extends RecyclerView.Adapter<RecyclerView.
             otherItemViewHolder.classAddr.setText("测试" + position);
             otherItemViewHolder.dataIndex.setText(position + "");
 
+            // 配置标签显示
             otherItemViewHolder.labelsView.setIndicator(true);
             ArrayList<String> strings = new ArrayList<>();
             if (courseList.get(position - 1).isJoin()) {

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:state_pressed="true" >
+<!--            <stroke android:width="2px" android:color="@color/cambridge_blue" />-->
+            <corners android:radius="5dp" />
+            <solid android:color="#cfcfd2" />
+        </shape>
+    </item>
+    <item>
+        <shape >
+            <!--shape：图形，rectangle为矩形；
+            stoke：描边
+            solid：填充
+            corners：圆角-->
+            <stroke android:width="2px" android:color="@color/cambridge_blue" />
+            <corners android:radius="5dp" />
+            <solid android:color="@color/white" />
+
+        </shape>
+    </item>
+</selector>

@@ -8,5 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="theme_red">#fb435b</color>
+    <color name="cambridge_blue">#2e8abb</color>
+    <color name="dark_blue">#3A5FCD</color>
+    <color name="test">#33bb77</color>
+
 
 </resources>

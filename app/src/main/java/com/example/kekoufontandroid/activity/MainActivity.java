@@ -85,6 +85,14 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.search_main:
                     Toast.makeText(MainActivity.this, "Search !", Toast.LENGTH_SHORT).show();
                     // 跳转搜索页面
+                    //跳转页面 跳转 Fragment->Activity 并传值
+                    Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                    //传递参数
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("subjectId", subjectId);
+//                    intent.putExtras(bundle);
+//            startActivity(intent);
+                    startActivityForResult(intent, 0);
                     break;
             }
             return true;

@@ -11,6 +11,7 @@ import lombok.Data;
 @Data
 public class SubjectDetailVO {
 
+    private String subjectId;
     private String teacher;
     private String subjectName;
     private String subjectDesc;

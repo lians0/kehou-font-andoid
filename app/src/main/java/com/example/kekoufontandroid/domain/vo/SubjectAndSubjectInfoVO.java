@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Data
 public class SubjectAndSubjectInfoVO {
-
+    private String subjectId;
     private String teacher;
     private String subjectName;
     private String subjectDesc;

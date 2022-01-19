@@ -27,11 +27,12 @@ import lombok.Setter;
 public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // todo:使用枚举
-    private static final int TITLE_SUBJECT = 0;  //列表元素类型为标题
-    private static final int TITLE_COURSE = 1;   //列表元素类型为标题
-    private static final int ITEM_SUBJECT = 2;
-    private static final int ITEM_COURSE = 3;
+    public static final int TITLE_SUBJECT = 0;  //列表元素类型为标题
+    public static final int TITLE_COURSE = 1;   //列表元素类型为标题
+    public static final int ITEM_SUBJECT = 2;
+    public static final int ITEM_COURSE = 3;
     int subjectLen; //subject 列表长度包括title（即subjectList.size()+1）
+    int courseLen;
     int sumCount;   //列表总长 包括所有title
     private SearchResultVO data;
     private Context context;
@@ -117,7 +118,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 SubjectSearchDTO subjectSearchDTO = data.getSubjectList().get(position - 1);
                 Glide.with(context).load(subjectSearchDTO.getIcon()).into(itemSubjectViewHolder.imageSearchSubject);
                 itemSubjectViewHolder.tvMainTitle.setText(subjectSearchDTO.getSubjectName() + "");
-                itemSubjectViewHolder.tvSubTitle.setText("老师："+subjectSearchDTO.getCreatorName() + "");
+                itemSubjectViewHolder.tvSubTitle.setText("老师：" + subjectSearchDTO.getCreatorName() + "");
                 break;
             case ITEM_COURSE:
                 SubjectAndCourseItemViewHolder itemCourseViewHolder = (SubjectAndCourseItemViewHolder) holder;
@@ -125,7 +126,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 //                Glide.with(context).load(subjectSearchDTO.getIcon()).into(itemSubjectViewHolder.imageSearchSubject);
 
                 itemCourseViewHolder.tvMainTitle.setText(courseSearchDTO.getCourseName() + "");
-                itemCourseViewHolder.tvSubTitle.setText("来自："+courseSearchDTO.getSubjectName() + "");
+                itemCourseViewHolder.tvSubTitle.setText("来自：" + courseSearchDTO.getSubjectName() + "");
                 break;
         }
 
@@ -138,7 +139,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             subjectLen = count += data.getSubjectList().size() + 1;
         }
         if (data.getCourseList() != null && data.getCourseList().size() > 0) {
-            count += data.getCourseList().size() + 1;
+            courseLen = count += data.getCourseList().size() + 1;
         }
         sumCount = count;
         Log.d("test", "count:" + count);
@@ -156,6 +157,14 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             imageSearchSubject = itemView.findViewById(R.id.image_search_subject_course);
             tvMainTitle = itemView.findViewById(R.id.tv_search_title_subject_course);
             tvSubTitle = itemView.findViewById(R.id.tv_search_from_subject_course);
+            itemView.setOnClickListener(v -> {
+                if (mOnSubjectAndCourseItemClickListener != null) {
+                    // 调用外部类的同名方法方法 Eg：外部类名.this.方法名()
+                    int itemViewType = SearchResultAdapter.this.getItemViewType(getAdapterPosition());
+                    mOnSubjectAndCourseItemClickListener.OnRecyclerItemClick(itemViewType, getAdapterPosition());
+                }
+                Log.d("lian", "test" + getAdapterPosition());
+            });
         }
     }
 
@@ -168,9 +177,28 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             super(itemView);
             tvLeftTitle = itemView.findViewById(R.id.tv_search_group_title_left);
             tvRightTitle = itemView.findViewById(R.id.tv_search_group_title_right);
+            itemView.setOnClickListener(v -> {
+                if (mOnSearchGroupTitleItemClickListener != null) {
+                    int itemViewType = SearchResultAdapter.this.getItemViewType(getAdapterPosition());
+                    mOnSearchGroupTitleItemClickListener.OnRecyclerItemClick(itemViewType, getAdapterPosition());
+
+                }
+                Log.d("lian", "test" + getAdapterPosition());
+            });
         }
     }
 
+    private SearchResultAdapter.OnSearchGroupTitleItemClickListener mOnSearchGroupTitleItemClickListener;
+    private SearchResultAdapter.OnSubjectAndCourseItemClickListener mOnSubjectAndCourseItemClickListener;
+
+
+    public interface OnSearchGroupTitleItemClickListener {
+        void OnRecyclerItemClick(int itemViewType, int position);
+    }
+
+    public interface OnSubjectAndCourseItemClickListener {
+        void OnRecyclerItemClick(int itemViewType, int position);
+    }
 }
 
 
